@@ -8,6 +8,11 @@
     <name>poi-master Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
+
+    <properties>
+        <poi.version>3.16</poi.version>
+    </properties>
+
     <build>
         <finalName>poi-master</finalName>
     </build>
@@ -47,38 +52,39 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.16</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-examples -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-examples</artifactId>
-            <version>3.16</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-excelant -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-excelant</artifactId>
-            <version>3.16</version>
+            <version>${poi.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.16</version>
+            <version>${poi.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-examples -->
+        <!--<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-examples</artifactId>
+            <version>${poi.version}</version>
+        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-excelant -->
+        <!--<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-excelant</artifactId>
+            <version>${poi.version}</version>
+        </dependency>-->
+
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml-schemas</artifactId>
-            <version>3.16</version>
-        </dependency>
+            <version>${poi.version}</version>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
-            <version>3.16</version>
-        </dependency>
+            <version>${poi.version}</version>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/stax/stax-api -->
         <!--<dependency>
             <groupId>stax</groupId>
