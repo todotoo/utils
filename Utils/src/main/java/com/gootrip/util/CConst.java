@@ -3,50 +3,50 @@ package com.gootrip.util;
 public class CConst {
 
    /**
-   * ÍøÕ¾Í¼Æ¬Ä¿Â¼
-   */
+    * ç½‘ç«™å›¾ç‰‡ç›®å½•
+    */
    public final static String PIC_ROOT = "/pic/";
 
    /**
-    * ÍøÕ¾Èí¼şÄ¿Â¼
+    * ç½‘ç«™è½¯ä»¶ç›®å½•
     */
 
    public final static String SOFT_ROOT = "/soft/";
 
    /**
-    * ¸½¼şÎÄ¼ş´æ·ÅµÄ¾ø¶ÔÂ·¾¶
+    * é™„ä»¶æ–‡ä»¶å­˜æ”¾çš„ç»å¯¹è·¯å¾„
     */
 
    public final static String ATTACH_ROOT = "/attach/";
 
    /**
-    * ¶¯Ì¬³ÌĞòÂ·¾¶
+    * åŠ¨æ€ç¨‹åºè·¯å¾„
     */
 
    public final static String ProgramPath = "/programs/";
 
 
    /**
-    * ÉÏ´«Í¼Æ¬´óĞ¡ÏŞÖÆ£¬µ¥Î»byte
+    * ä¸Šä¼ å›¾ç‰‡å¤§å°é™åˆ¶ï¼Œå•ä½byte
     */
    public final static  long MAX_UPLOAD_PIC_SIZE = 1000 * 1024 * 4;
    /**
-    * ÉÏ´«ÎÄ¼ş´óĞ¡ÏŞÖÆ£¬µ¥Î»byte
+    * ä¸Šä¼ æ–‡ä»¶å¤§å°é™åˆ¶ï¼Œå•ä½byte
     */
    public final static  long MAX_UPLOAD_FILE_SIZE = 10 * 1024 * 1024 * 8;
 
    /**
-    * ÉÏ´«Èí¼ş´óĞ¡ÏŞÖÆ£¬µ¥Î»byte
+    * ä¸Šä¼ è½¯ä»¶å¤§å°é™åˆ¶ï¼Œå•ä½byte
     */
    public final static  long MAX_UPLOAD_SOFT_SIZE = 100 * 1024 * 1024 * 8;
 
    /**
-     * ´íÎóµÇÂ¼´ÎÊı×î¶à3´Î
-     */
+    * é”™è¯¯ç™»å½•æ¬¡æ•°æœ€å¤š3æ¬¡
+    */
    public final static  int MAX_LOGIN_TIMES = 3;
    /**
-     * ´íÎóµÇÂ¼3´ÎºóÓÃ»§±»Ëø10·ÖÖÓ
-     */
+    * é”™è¯¯ç™»å½•3æ¬¡åç”¨æˆ·è¢«é”10åˆ†é’Ÿ
+    */
    public final static int LOCK_TIME = +10;
 
    public final static String[] ADMIN = {"admin", "longlob"};

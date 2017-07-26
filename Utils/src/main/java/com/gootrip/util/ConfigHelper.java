@@ -1,5 +1,5 @@
-/** 
- * 读取配置文件
+/**
+ * 璇诲彇閰嶇疆鏂囦欢
  */
 package com.gootrip.util;
 
@@ -11,13 +11,13 @@ import org.apache.commons.configuration.ConfigurationFactory;
 
 /**
  * @author advance
- * 
+ *
  */
 public class ConfigHelper {
 	public ConfigHelper(){
 	}
 	/**
-	 * 读取配置文件
+	 * 璇诲彇閰嶇疆鏂囦欢
 	 * @param strfile
 	 * @return
 	 */

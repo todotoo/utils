@@ -1,4 +1,4 @@
-package com.bjdv.catv.util;
+package com.gootrip.util;
 
 public class Escape {
 	private final static String[] hex = { "00", "01", "02", "03", "04", "05",
@@ -53,7 +53,7 @@ public class Escape {
 
 	/** */
 	/**   
-	 * ±àÂë 
+	 * ï¿½ï¿½ï¿½ï¿½ 
 	 *    
 	 * @param s   
 	 * @return   
@@ -88,7 +88,7 @@ public class Escape {
 
 	/** */
 	/**   
-	 * ½âÂë ËµÃ÷£º±¾·½·¨±£Ö¤ ²»ÂÛ²ÎÊýsÊÇ·ñ¾­¹ýescape()±àÂë£¬¾ùÄÜµÃµ½ÕýÈ·µÄ¡°½âÂë¡±½á¹û 
+	 * ï¿½ï¿½ï¿½ï¿½ Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ ï¿½ï¿½ï¿½Û²ï¿½ï¿½ï¿½sï¿½Ç·ñ¾­¹ï¿½escape()ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ÜµÃµï¿½ï¿½ï¿½È·ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ë¡±ï¿½ï¿½ï¿½ 
 	 *    
 	 * @param s   
 	 * @return   
@@ -132,7 +132,7 @@ public class Escape {
 	}
 
 	public static void main(String[] args) {
-		String stest = "Ò»ÉùÐ¦°Á½­ºþÖ®Çú1234 abcd[]()<+>,.~\"";
+		String stest = "Ò»ï¿½ï¿½Ð¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½1234 abcd[]()<+>,.~\"";
 		System.out.println(stest);
 		System.out.println(escape(stest));
 		System.out.println(unescape(escape(stest)));
