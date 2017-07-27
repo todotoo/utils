@@ -56,8 +56,7 @@ public class ArithmeticUtil {
      */
     public static String strAdd(String v1, String v2, int scale) {
         if (scale < 0) {
-            throw new IllegalArgumentException(
-                    "The scale must be a positive integer or zero");
+            throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
@@ -99,8 +98,7 @@ public class ArithmeticUtil {
      */
     public static BigDecimal round(String v, int scale) {
         if (scale < 0) {
-            throw new IllegalArgumentException(
-                    "The scale must be a positive integer or zero");
+            throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
         BigDecimal b = new BigDecimal(v);
         BigDecimal one = new BigDecimal("1");
@@ -116,8 +114,7 @@ public class ArithmeticUtil {
      */
     public static String strSub(String v1, String v2, int scale) {
         if (scale < 0) {
-            throw new IllegalArgumentException(
-                    "The scale must be a positive integer or zero");
+            throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
