@@ -38,14 +38,14 @@ public class ImageUtil {
     }
 
     /**
-     *
      * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-//        ImageUtil thumbnailatorTest = new ImageUtil();
-        ImageUtil.resize(FileUtils.readFileToByteArray(new File("F:\\PrivateCentre\\images\\壁纸\\zhuoku251.jpg")), 300, 300, "D:\\home\\webapps\\filestore\\images\\xx.jpg");
-//        thumbnailatorTest.test2();
+        byte[] sourceBytes = FileUtils.readFileToByteArray(new File("F:\\PrivateCentre\\images\\壁纸\\zhuoku251.jpg"));
+        String targetPath = "D:\\home\\webapps\\filestore\\images\\xx.jpg";
+//        ImageUtil.resize(sourceBytes, 300, 300, targetPath);
+        ImageUtil.resize(sourceBytes, 0.1F, targetPath);
 //        thumbnailatorTest.test3();
 //        thumbnailatorTest.test4();
 //        thumbnailatorTest.test5();
@@ -60,26 +60,22 @@ public class ImageUtil {
      *
      * @throws IOException
      */
-    public static void resize(byte[] sourceBytes, Integer width, Integer height, String targetPath) throws IOException {
+    public static void resize(byte[] sourceBytes, int width, int height, String targetPath) throws IOException {
         /*
          * size(width,height) 若图片横比200小，高比300小，不变
          * 若图片横比200小，高比300大，高缩小到300，图片比例不变 若图片横比200大，高比300小，横缩小到200，图片比例不变
          * 若图片横比200大，高比300大，图片按比例缩小，横为200或高为300
          */
-        if(width == null || height == null) {
-            return;
-        }
-        String tempDir = System.getProperty("java.io.tmpdir"); // 临时目录
+        // 临时目录
+        String tempDir = System.getProperty("java.io.tmpdir");
         String imageName = UUIDGenerator.getUUID().toString();
         File tempSourceFile = new File(tempDir + "/" + imageName);
-        FileUtils.writeByteArrayToFile(tempSourceFile, sourceBytes); // 把图片流输出到临时文件中
-        String sourcePath = tempSourceFile.getAbsolutePath(); // 获取生成的临时文件路径
-//        String tempTargetPath = sourcePath + "_target";
-//        File tempTargetFile = new File(tempTargetPath);
-//        FileUtils.readFileToByteArray(tempTargetFile);
-        Thumbnails.of(sourcePath).size(width, height).toFile(targetPath); //压缩成指定大小，输出到指定位置
-        FileUtils.deleteQuietly(tempSourceFile); // 删除文件
-//        FileUtils.deleteQuietly(tempTargetFile); // 删除文件
+        // 把图片流输出到临时文件中
+        FileUtils.writeByteArrayToFile(tempSourceFile, sourceBytes);
+        // 压缩成指定大小，输出到指定位置
+        Thumbnails.of(tempSourceFile).size(width, height).toFile(targetPath);
+        // 删除文件
+        FileUtils.deleteQuietly(tempSourceFile);
     }
 
     /**
@@ -87,12 +83,29 @@ public class ImageUtil {
      *
      * @throws IOException
      */
-    private void test2() throws IOException {
-        /**
-         * scale(比例)
-         */
-        Thumbnails.of("images/test.jpg").scale(0.25f).toFile("C:/image_25%.jpg");
-        Thumbnails.of("images/test.jpg").scale(1.10f).toFile("C:/image_110%.jpg");
+    public static void resize(byte[] sourceBytes, float ratio, String targetPath) throws IOException {
+        // 临时目录
+        String tempDir = System.getProperty("java.io.tmpdir");
+        String imageName = UUIDGenerator.getUUID().toString();
+        File tempSourceFile = new File(tempDir + "/" + imageName);
+        // 把图片流输出到临时文件中
+        FileUtils.writeByteArrayToFile(tempSourceFile, sourceBytes);
+        // scale(比例)
+        Thumbnails.of(tempSourceFile).scale(ratio).toFile(targetPath);
+        // 删除文件
+        FileUtils.deleteQuietly(tempSourceFile);
+    }
+
+    /**
+     * 按照比例进行缩放
+     * @param srcFile 源文件图片
+     * @param ratio 压缩的比例
+     * @param targetPath 输出的目标路径
+     * @throws IOException
+     */
+    public static void resize(File srcFile, float ratio, String targetPath) throws IOException {
+        // scale(比例)
+        Thumbnails.of(srcFile).scale(ratio).toFile(targetPath);
     }
 
     /**
