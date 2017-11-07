@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * @author wg 本类只有这么一个方法，用来发邮件！
+ * 邮件工具类
+ * @author wg
  */
 public class MailUtils {
 
@@ -51,34 +52,44 @@ public class MailUtils {
 		};
 
 		// 获取session对象
-		return Session.getInstance(prop, auth);
+		Session session = Session.getInstance(prop, auth);
+		// 设置为debug模式, 可以查看详细的发送 log
+		session.setDebug(true);
+		return session;
 	}
 
 	/**
 	 * 创建一封只包含文本的简单邮件
 	 *
 	 * @param session     和服务器交互的会话
-	 * @param sendMail    发件人邮箱
-	 * @param receiveMail 收件人邮箱
+	 * @param mail        邮件对象
 	 * @return
 	 * @throws Exception
 	 */
-	public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail) throws Exception {
+	public static MimeMessage createMimeMessage(Session session, Mail mail) throws Exception {
 		// 1. 创建一封邮件
 		MimeMessage message = new MimeMessage(session);
 
 		// 2. From: 发件人
-		message.setFrom(new InternetAddress(sendMail, "服务器", "UTF-8"));
+		message.setFrom(new InternetAddress(mail.getFrom()));
 
 		// 3. To: 收件人
-		message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "XX用户", "UTF-8"));
-		message.setRecipient(MimeMessage.RecipientType.CC, new InternetAddress(sendMail, "XX用户", "UTF-8"));
+		message.addRecipients(RecipientType.TO, mail.getToAddress());
+		// 设置抄送
+		String cc = mail.getCcAddress();
+		if (!cc.isEmpty()) {
+			message.addRecipients(RecipientType.CC, cc);
+		}
+		// 设置暗送
+		String bcc = mail.getBccAddress();
+		if (!bcc.isEmpty()) {
+			message.addRecipients(RecipientType.BCC, bcc);
+		}
+		// 4. Subject: 邮件主题
+		message.setSubject(mail.getSubject(), "UTF-8");
 
-		// 4. Subject: 邮件主题（标题有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改标题）
-		message.setSubject("服务器", "UTF-8");
-
-		// 5. Content: 邮件正文（可以使用html标签）（内容有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改发送内容）
-		message.setContent("XX用户你好, 再等一年。。。", "text/html;charset=UTF-8");
+		// 5. Content: 邮件正文（可以使用html标签）
+		message.setContent(mail.getContent(), "text/html;charset=UTF-8");
 
 		// 6. 设置发件时间
 		message.setSentDate(new Date());

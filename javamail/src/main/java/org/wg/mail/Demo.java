@@ -17,7 +17,7 @@ public class Demo {
 		prop.setProperty("mail.host", host);
 		// 需要请求认证
 		prop.setProperty("mail.smtp.auth", "true");
-
+		// 创建验证器
 		Authenticator auth = new Authenticator() {
 			@Override
 			public PasswordAuthentication getPasswordAuthentication() {
@@ -53,7 +53,7 @@ public class Demo {
 		Authenticator auth = new Authenticator() {
 			@Override
 			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("itcast_cxf", "itcast");
+				return new PasswordAuthentication("bianyi_run", "gang0000");
 			}
 		};
 
@@ -63,8 +63,8 @@ public class Demo {
 
 		MimeMessage msg = new MimeMessage(session);
 
-		msg.setFrom(new InternetAddress("itcast_cxf@163.com"));
-		msg.addRecipients(RecipientType.TO, "itcast_cxf@qq.com");
+		msg.setFrom(new InternetAddress("bianyi_run@163.com"));
+		msg.addRecipients(RecipientType.TO, "1289868863@qq.com");
 		msg.setSubject("这是一封带有附件的邮件！");
 
 		MimeMultipart parts = new MimeMultipart();
@@ -79,7 +79,7 @@ public class Demo {
 //		parts.addBodyPart(part1);
 
 		MimeBodyPart part2 = new MimeBodyPart();
-		part2.attachFile("F:\\白冰.jpg");
+		part2.attachFile("C:\\Users\\win7\\Pictures\\aaa.gif");
 		part2.setFileName(MimeUtility.encodeText("白冰.jpg"));
 		parts.addBodyPart(part2);
 

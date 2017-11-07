@@ -1,4 +1,4 @@
-package org.wg.mail;
+package org.wg.mail.wait;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

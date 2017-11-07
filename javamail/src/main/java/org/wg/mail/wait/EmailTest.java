@@ -1,4 +1,4 @@
-package org.wg.mail;
+package org.wg.mail.wait;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;

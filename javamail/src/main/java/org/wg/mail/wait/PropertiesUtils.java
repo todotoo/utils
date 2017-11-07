@@ -1,4 +1,4 @@
-package org.wg.mail;
+package org.wg.mail.wait;
 
 import java.io.IOException;
 import java.io.InputStream;
