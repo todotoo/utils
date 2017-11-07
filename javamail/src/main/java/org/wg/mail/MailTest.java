@@ -1,6 +1,7 @@
 package org.wg.mail;
 
 import org.junit.Test;
+import org.wg.util.PropertiesLoader;
 
 import javax.mail.*;
 import javax.mail.Message.RecipientType;
@@ -8,7 +9,8 @@ import javax.mail.internet.*;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Demo {
+public class MailTest {
+
 	@Test
 	public void fun1() throws AddressException, MessagingException {
 		String host = "smtp.163.com";
@@ -53,7 +55,7 @@ public class Demo {
 		Authenticator auth = new Authenticator() {
 			@Override
 			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("bianyi_run", "gang0000");
+				return new PasswordAuthentication("bianyi_run@163.com", "gang0000");
 			}
 		};
 
@@ -95,6 +97,11 @@ public class Demo {
 
 	@Test
 	public void fun3() throws MessagingException, IOException {
+		PropertiesLoader pl = new PropertiesLoader("message.properties");
+		String host = pl.getProperty("MESSAGE.MAIL_SMTP_HOST");
+		String username = pl.getProperty("MESSAGE.MAIL_USER_NAME");
+		String password = pl.getProperty("MESSAGE.MAIL_USER_PASSWORD");
+
 		Mail mail = new Mail("bianyi_run@163.com", "1289868863@qq.com");
 		mail.setSubject("多哈哈哈");
 		mail.setContent("这是一封测试邮件,不要太在意!");
