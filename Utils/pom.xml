@@ -50,6 +50,13 @@
             <version>2.5</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+
         <!-- pinyin4j -->
         <dependency>
             <groupId>com.belerweb</groupId>
@@ -90,5 +97,7 @@
             <artifactId>thumbnailator</artifactId>
             <version>0.4.8</version>
         </dependency>
+
+
     </dependencies>
 </project>
