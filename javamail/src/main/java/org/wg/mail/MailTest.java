@@ -106,7 +106,7 @@ public class MailTest {
 		mail.setSubject("多哈哈哈");
 		mail.setContent("这是一封测试邮件,不要太在意!");
 
-		Session session = MailUtils.createSession("smtp.163.com", "bianyi_run", "gang0000");
+		Session session = MailUtils.createSession(host, username, password);
 		MailUtils.send(session, mail);
 	}
 }
