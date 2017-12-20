@@ -720,43 +720,4 @@ public class StringUtils {
         calendar.add(Calendar.MONTH, 3);    //得到后3个月
         return getSuffixStr(calendar.getTime());
     }
-
-    public static String cntIntToNum(int n) {
-        String temp = "";
-        switch (n) {
-            case 1:
-                temp = "状元";
-                break;
-            case 2:
-                temp = "榜眼";
-                break;
-            case 3:
-                temp = "探花";
-                break;
-            case 4:
-                temp = "第四";
-                break;
-            case 5:
-                temp = "第五";
-                break;
-            case 6:
-                temp = "第六";
-                break;
-            case 7:
-                temp = "第七";
-                break;
-            case 8:
-                temp = "第八";
-                break;
-            case 9:
-                temp = "第九";
-                break;
-            case 0:
-                temp = "零";
-                break;
-            default:
-                temp = "无";
-        }
-        return temp;
-    }
 }
