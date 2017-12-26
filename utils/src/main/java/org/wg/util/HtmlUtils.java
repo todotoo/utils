@@ -1,5 +1,7 @@
 package org.wg.util;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -20,8 +22,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.log4j.Logger;
 
 /**
  * @author li.biao
@@ -308,7 +308,7 @@ public class HtmlUtils {
 
         HtmlUtils.staticHtmlPad("http://mobile.51zhiye.com", "/pad/mediumData?houseProjectId=7944a420-1dae-4682-b570-ce2d1ecef38d", "D://My Documents//58ttt//", "2.html", "file:///android_asset");
         /*String html = "<input type=\"hidden\" key=\"hiddenimg\" value=\"http://mobile.51zhiye.com/default/style/pad/images/promote/ypls/ypls1.jpg\"/>";
-		html += "<img src=\"\"/>";
+        html += "<img src=\"\"/>";
 		html += "<input  type=\"hidden\" key=\"hiddenimg\" value=\"http://mobile.51zhiye.com/default/style/pad/images/promote/ypls/ypls3.jpg\"/>";
 		List<String> strlist = HtmlUtils.getImageUrl(html, HIDIMGURL_REG);
 		List<String> srclist = HtmlUtils.getImageSrc(strlist, IMGSRC_REG);

@@ -1,4 +1,5 @@
 package org.wg.util;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -23,34 +24,35 @@ public class BigDecimalUtil {
      */
 
 
-
     /**
      * 向上进位
+     *
      * @param: newScale 返回的 BigDecimal 值的标度
      * @param: b 要转换值
      * @return: BigDecimal
      */
     public static BigDecimal setScaleRoundUp(BigDecimal b, int newScale) {
-    	// 舍入远离零的舍入模式。在丢弃非零部分之前始终增加数字。注意，此舍入模式始终不会减少计算值的大小。 
+        // 舍入远离零的舍入模式。在丢弃非零部分之前始终增加数字。注意，此舍入模式始终不会减少计算值的大小。
         return b.setScale(newScale, RoundingMode.UP);
     }
 
     /**
      * 截位
+     *
      * @param: newScale 返回的 BigDecimal 值的标度
      * @param: b 要转换值
      * @return: BigDecimal
      */
     public static BigDecimal setScaleRoundDown(BigDecimal b, int newScale) {
-    	// 接近零的舍入模式。在丢弃某部分之前始终不增加数字（即截短）。注意，此舍入模式始终不会增加计算值的大小。
+        // 接近零的舍入模式。在丢弃某部分之前始终不增加数字（即截短）。注意，此舍入模式始终不会增加计算值的大小。
         return b.setScale(newScale, RoundingMode.DOWN);
     }
 
     /**
      * @param: @param
-     *             newScale
+     * newScale
      * @param: @param
-     *             b
+     * b
      * @param: @return
      * @return: BigDecimal
      */
@@ -60,9 +62,9 @@ public class BigDecimalUtil {
 
     /**
      * @param: @param
-     *             newScale
+     * newScale
      * @param: @param
-     *             b
+     * b
      * @param: @return
      * @return: BigDecimal
      */
@@ -72,9 +74,9 @@ public class BigDecimalUtil {
 
     /**
      * @param: @param
-     *             newScale
+     * newScale
      * @param: @param
-     *             b
+     * b
      * @param: @return
      * @return: BigDecimal
      */
@@ -84,9 +86,9 @@ public class BigDecimalUtil {
 
     /**
      * @param: @param
-     *             newScale
+     * newScale
      * @param: @param
-     *             b
+     * b
      * @param: @return
      * @return: BigDecimal
      */
@@ -96,9 +98,9 @@ public class BigDecimalUtil {
 
     /**
      * @param: @param
-     *             newScale
+     * newScale
      * @param: @param
-     *             b
+     * b
      * @param: @return
      * @return: BigDecimal
      */
@@ -108,9 +110,9 @@ public class BigDecimalUtil {
 
     /**
      * @param: @param
-     *             newScale
+     * newScale
      * @param: @param
-     *             b
+     * b
      * @param: @return
      * @return: BigDecimal
      */

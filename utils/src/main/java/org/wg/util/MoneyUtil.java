@@ -1,4 +1,4 @@
-package com.wuyizhiye.base.util;
+package org.wg.util;
 
 /**
  * @author li.biao

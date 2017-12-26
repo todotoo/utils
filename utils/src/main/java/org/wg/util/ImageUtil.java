@@ -98,8 +98,9 @@ public class ImageUtil {
 
     /**
      * 按照比例进行缩放
-     * @param srcFile 源文件图片
-     * @param ratio 压缩的比例
+     *
+     * @param srcFile    源文件图片
+     * @param ratio      压缩的比例
      * @param targetPath 输出的目标路径
      * @throws IOException
      */

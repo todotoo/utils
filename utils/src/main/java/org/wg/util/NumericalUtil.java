@@ -1,4 +1,4 @@
-package com.wuyizhiye.base.util;
+package org.wg.util;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;

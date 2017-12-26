@@ -1,4 +1,4 @@
-package com.wuyizhiye.base.util;
+package org.wg.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

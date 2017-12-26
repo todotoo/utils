@@ -1,18 +1,15 @@
-package com.wuyizhiye.base.util;
+package org.wg.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.zip.ZipEntry;
 
 public class PicZipUtilCallUtil implements Callable<String> {
 
-    private BufferedInputStream Bin;
     FileOutputStream out;
+    private BufferedInputStream Bin;
 
     public PicZipUtilCallUtil(BufferedInputStream Bin, FileOutputStream out) {
         this.Bin = Bin;

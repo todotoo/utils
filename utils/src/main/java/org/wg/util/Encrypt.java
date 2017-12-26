@@ -1,4 +1,4 @@
-package com.wuyizhiye.base.util;
+package org.wg.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

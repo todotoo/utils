@@ -1,5 +1,12 @@
 package org.wg.util;
 
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
@@ -13,13 +20,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
 /**
  * @author li.biao
  * @ClassName StringUtils
@@ -27,6 +27,12 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * @date 2015-4-1
  */
 public class StringUtils {
+
+    /********************* 移除样式 start ********************/
+    private static final String regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; // 定义script的正则表达式
+    private static final String regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; // 定义style的正则表达式
+    private static final String regEx_html = "<[^>]+>"; // 定义HTML标签的正则表达式
+    private static final String regEx_escape = "&[^;]+;"; // 定义HTML中的转义字符
 
     /**
      * @param str
@@ -350,7 +356,6 @@ public class StringUtils {
         return t4;
     }
 
-
     /**
      * @param target
      * @param isSimpleSpell
@@ -379,7 +384,6 @@ public class StringUtils {
         }
         return spell.toString();
     }
-
 
     /**
      * @param cnStr
@@ -597,13 +601,6 @@ public class StringUtils {
         }
         return null;
     }
-
-
-    /********************* 移除样式 start ********************/
-    private static final String regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; // 定义script的正则表达式
-    private static final String regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; // 定义style的正则表达式
-    private static final String regEx_html = "<[^>]+>"; // 定义HTML标签的正则表达式
-    private static final String regEx_escape = "&[^;]+;"; // 定义HTML中的转义字符
 
     //去掉html格式
     public static String trimStyle(String htmlStr) {
