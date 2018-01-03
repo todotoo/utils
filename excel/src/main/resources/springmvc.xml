@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!-- 可以扫描controller、service、... 这里让扫描controller，指定controller的包 -->
+    <context:component-scan base-package="org.wg.excel.controller"></context:component-scan>
+
+    <!-- 处理器映射器 将bean的name作为url进行查找 ，需要在配置Handler时指定beanname（就是url）
+    所有的映射器都实现 HandlerMapping接口。
+    -->
+    <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+
+    <!--简单url映射  -->
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"></bean>-->
+    <!--
+        mvc:annotation-driven默认加载很多的参数绑定方法，
+        比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置
+        注解映射器：org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 和
+        注解适配器：org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter
+        实际开发时使用mvc:annotation-driven
+     -->
+    <mvc:annotation-driven>
+        <!-- Spring中解析字符串的转换器默认编码是ISO-8859-1， 处理 @ResponseBody 请求返回json字符串的中文乱码问题 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!-- 处理器适配器 所有处理器适配器都实现 HandlerAdapter接口 -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    <!-- 另一个非注解的适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+
+    <!-- 视图解析器，解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 配置jsp路径的前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 配置jsp路径的后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- springmvc文件上传配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="maxUploadSize" value="104857600"/>
+        <property name="maxInMemorySize" value="40960"></property>
+    </bean>
+</beans>
