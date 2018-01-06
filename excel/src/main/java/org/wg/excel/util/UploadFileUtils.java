@@ -29,7 +29,7 @@ public class UploadFileUtils {
         List<String> list = new ArrayList<>();
         // 创建一个通用的多部分解析器
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-        // 判断 request 是否有文件上传,即多部分请求
+        // 判断 request 是否有文件上传, 即多部分请求
         if (multipartResolver.isMultipart(request)) {
             // 转换成多部分request
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;

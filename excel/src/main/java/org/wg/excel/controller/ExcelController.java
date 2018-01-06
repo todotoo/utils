@@ -3,7 +3,7 @@ package org.wg.excel.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.wg.excel.util.ExcelUtils;
+//import org.wg.excel.util.ExcelUtils;
 import org.wg.excel.util.UploadFileUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +23,11 @@ public class ExcelController {
         List<List<String>> listRow;
         if (pathList != null && pathList.size() > 0) {
             for (String path : pathList) {
-                listRow = ExcelUtils.read(path);
+//                listRow = ExcelUtils.read(path);
 //                new ImportExcelUtil().getBankListByExcel()
-                for (List<String> row : listRow) {
-                    System.out.println(row);
-                }
+//                for (List<String> row : listRow) {
+//                    System.out.println(row);
+//                }
             }
         }
         return "success";

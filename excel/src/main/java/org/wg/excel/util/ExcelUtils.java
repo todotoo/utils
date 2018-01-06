@@ -10,7 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,11 +22,19 @@ import java.util.List;
  * @author run
  */
 public class ExcelUtils {
+    /**
+     * 2003- 版本的excel
+     */
+    private static final String EXCEL_XLS = "xls";
 
+    /**
+     * 2007+ 版本的excel
+     */
+    private static final String EXCEL_XLSX = "xlsx";
 
     public static void main(String[] args) throws Exception {
 //        List<List<String>> dataList = read("F:\\Temp\\test.xls");
-        List<List<String>> dataList = read("F:\\Temp\\事务实验.xlsx");
+        List<List<String>> dataList = read(new File("F:\\Temp\\事务实验.xlsx"));
         System.out.println(dataList.size());
         for (List<String> dataRole : dataList) {
             for (String data : dataRole) {
@@ -41,8 +49,8 @@ public class ExcelUtils {
      * @return
      * @throws Exception
      */
-    public static List<List<String>> read(String filePath) throws Exception {
-        Workbook workbook = createExcelObj(filePath);
+    public static List<List<String>> read(File excelFile) throws Exception {
+        Workbook workbook = getWorkbok(excelFile);
         return read(workbook, 0, 0, getRowCount(workbook, 0) - 1);
     }
 
@@ -53,26 +61,26 @@ public class ExcelUtils {
      * @return
      * @throws Exception
      */
-    public static List<List<String>> read(String filePath, int sheetIx) throws Exception {
-        Workbook workbook = createExcelObj(filePath);
+    public static List<List<String>> read(File excelFile, int sheetIx) throws Exception {
+        Workbook workbook = getWorkbok(excelFile);
         return read(workbook, sheetIx, 0, getRowCount(workbook, sheetIx) - 1);
     }
 
     /**
      * 把Excel文件转成工作薄对象
      *
+     * @param excelFile excel文件
      * @return
      */
-    public static Workbook createExcelObj(String filePath) throws IOException {
-        File f = new File(filePath);
-        String suffix = f.getName().substring(f.getName().lastIndexOf(".") + 1);
-        List<String[]> listCell = new ArrayList<>();
-        FileInputStream is = new FileInputStream(f);
+    public static Workbook getWorkbok(File excelFile) throws Exception {
         Workbook workbook;
-        if ("xls".equals(suffix.toLowerCase())) {
+        InputStream is = new FileInputStream(excelFile);
+        if (excelFile.getName().endsWith(EXCEL_XLS)) {
             workbook = new HSSFWorkbook(is);
-        } else {
+        } else if (excelFile.getName().endsWith(EXCEL_XLSX)) {
             workbook = new XSSFWorkbook(is);
+        } else {
+            throw new Exception("文件不是excel文件！");
         }
         return workbook;
     }
@@ -149,15 +157,19 @@ public class ExcelUtils {
                     cellStr = new DecimalFormat("0").format(cell.getNumericCellValue());
                 }
                 break;
-            case STRING: // 字符串
+            // 字符串
+            case STRING:
                 cellStr = cell.getStringCellValue();
                 break;
-            case FORMULA: // 公式
+            // 公式
+            case FORMULA:
                 cellStr = cell.getCellFormula();
                 break;
-            case BLANK: // 空值
+            // 空值
+            case BLANK:
                 break;
-            case ERROR: // 故障
+            // 故障
+            case ERROR:
                 break;
             default:
                 break;
