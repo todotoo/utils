@@ -21,18 +21,14 @@ public class UploadFileUtils {
      * 上传文件，返回文件路径集合
      *
      * @param request
-     * @param response
      * @return
      * @throws IllegalStateException
      * @throws IOException
      */
-    public static List<String> uploadFiles(HttpServletRequest request)
-            throws IllegalStateException, IOException {
-
-        List<String> list = new ArrayList<String>();
+    public static List<String> uploadFiles(HttpServletRequest request) throws IllegalStateException, IOException {
+        List<String> list = new ArrayList<>();
         // 创建一个通用的多部分解析器
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-                request.getSession().getServletContext());
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         // 判断 request 是否有文件上传,即多部分请求
         if (multipartResolver.isMultipart(request)) {
             // 转换成多部分request
@@ -54,9 +50,7 @@ public class UploadFileUtils {
                         }
                         String path = request.getSession().getServletContext().getRealPath("upload") + File.separator + fileName;
                         File localFile = new File(path);
-
                         file.transferTo(localFile);
-
                         list.add(localFile.getAbsolutePath());
                     }
                 }
