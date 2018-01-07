@@ -51,7 +51,7 @@ public class ExcelUtils {
      */
     public static List<List<String>> read(File excelFile) throws Exception {
         Workbook workbook = getWorkbok(excelFile);
-        return read(workbook, 0, 0, getRowCount(workbook, 0) - 1);
+        return read(workbook, 0, 0, getRowCount(workbook, 0));
     }
 
     /**
@@ -63,7 +63,7 @@ public class ExcelUtils {
      */
     public static List<List<String>> read(File excelFile, int sheetIx) throws Exception {
         Workbook workbook = getWorkbok(excelFile);
-        return read(workbook, sheetIx, 0, getRowCount(workbook, sheetIx) - 1);
+        return read(workbook, sheetIx, 0, getRowCount(workbook, sheetIx));
     }
 
     /**
@@ -129,7 +129,7 @@ public class ExcelUtils {
         if (sheet.getPhysicalNumberOfRows() == 0) {
             return 0;
         }
-        return sheet.getLastRowNum() + 1;
+        return sheet.getLastRowNum();
     }
 
     /**
