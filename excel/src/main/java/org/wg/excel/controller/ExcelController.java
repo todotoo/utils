@@ -3,12 +3,10 @@ package org.wg.excel.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.wg.excel.util.ExcelReader;
-import org.wg.excel.util.ImportExcelUtil;
+//import org.wg.excel.util.ExcelUtils;
 import org.wg.excel.util.UploadFileUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,16 +18,16 @@ public class ExcelController {
 
     @RequestMapping("readExcel")
     @ResponseBody
-    public String readExcel(HttpServletRequest request) throws IOException {
+    public String readExcel(HttpServletRequest request) throws Exception {
         List<String> pathList = UploadFileUtils.uploadFiles(request);
-        List<String[]> listRow;
+        List<List<String>> listRow;
         if (pathList != null && pathList.size() > 0) {
             for (String path : pathList) {
-                listRow = ExcelReader.getExcelData(path);
+//                listRow = ExcelUtils.read(path);
 //                new ImportExcelUtil().getBankListByExcel()
-                for (String[] row : listRow) {
-                    System.out.println(row);
-                }
+//                for (List<String> row : listRow) {
+//                    System.out.println(row);
+//                }
             }
         }
         return "success";
