@@ -21,10 +21,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author li.biao
- * @ClassName StringUtils
- * @Description 字符串工具类
- * @date 2015-4-1
+ * 字符串工具类<br />
+ * 常用指数：★★★★★
+ *
+ * @author wg
+ * @date 2015-4-1 10:10:10
  */
 public class StringUtils {
 
