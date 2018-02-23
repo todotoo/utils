@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wg.activity.mapper.WinningRecordMapper">
+    <resultMap id="BaseResultMap" type="WinningRecord">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="prize_name" property="prizeName" jdbcType="VARCHAR"/>
+        <result column="prize_grade" property="prizeGrade" jdbcType="TINYINT"/>
+        <result column="winning_time" property="winningTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        t.id, t.user_id, t.prize_name, t.prize_grade, t.winning_time
+    </sql>
+    <sql id="condition">
+        <if test="null!=params">
+            <if test="params.id != null">
+                and t.id = #{params.id,jdbcType=INTEGER}
+            </if>
+            <if test="params.userId != null">
+                and t.user_id = #{params.userId,jdbcType=INTEGER}
+            </if>
+            <if test="params.prizeName != null and '' != params.prizeName">
+                and t.prize_name = #{params.prizeName,jdbcType=VARCHAR}
+            </if>
+            <if test="params.prizeGrade != null">
+                and t.prize_grade = #{params.prizeGrade,jdbcType=TINYINT}
+            </if>
+            <if test="params.winningTime != null">
+                and t.winning_time = #{params.winningTime,jdbcType=TIMESTAMP}
+            </if>
+        </if>
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_winning_record t
+        where t.id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_winning_record t
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) as s from t_winning_record t where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_winning_record t
+        where 1=1
+        <include refid="condition"/>
+        <if test="orderByField != null and ''!=orderByField">
+            order by t.${orderByField}
+            <if test="orderByField">
+                ${orderBy}
+            </if>
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_winning_record
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByPrimarayKeyForModel" parameterType="WinningRecord">
+        delete from t_winning_record
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="WinningRecord">
+        insert into t_winning_record (id, user_id, prize_name,
+        prize_grade, winning_time)
+        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{prizeName,jdbcType=VARCHAR},
+        #{prizeGrade,jdbcType=TINYINT}, #{winningTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="WinningRecord">
+        insert into t_winning_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="prizeName != null">
+                prize_name,
+            </if>
+            <if test="prizeGrade != null">
+                prize_grade,
+            </if>
+            <if test="winningTime != null">
+                winning_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="prizeName != null">
+                #{prizeName,jdbcType=VARCHAR},
+            </if>
+            <if test="prizeGrade != null">
+                #{prizeGrade,jdbcType=TINYINT},
+            </if>
+            <if test="winningTime != null">
+                #{winningTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="WinningRecord">
+        update t_winning_record
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="prizeName != null">
+                prize_name = #{prizeName,jdbcType=VARCHAR},
+            </if>
+            <if test="prizeGrade != null">
+                prize_grade = #{prizeGrade,jdbcType=TINYINT},
+            </if>
+            <if test="winningTime != null">
+                winning_time = #{winningTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="WinningRecord">
+        update t_winning_record
+        set user_id = #{userId,jdbcType=INTEGER},
+        prize_name = #{prizeName,jdbcType=VARCHAR},
+        prize_grade = #{prizeGrade,jdbcType=TINYINT},
+        winning_time = #{winningTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wg.activity.mapper.PrizeMapper">
+    <resultMap id="BaseResultMap" type="Prize">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="grade" property="grade" jdbcType="TINYINT"/>
+        <result column="probability" property="probability" jdbcType="REAL"/>
+        <result column="upper_limit" property="upperLimit" jdbcType="SMALLINT"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        t.id, t.activity_id, t.name, t.grade, t.probability, t.upper_limit, t.type, t.amount,
+        t.gmt_modified, t.gmt_create
+    </sql>
+    <sql id="condition">
+        <if test="null!=params">
+            <if test="params.id != null">
+                and t.id = #{params.id,jdbcType=INTEGER}
+            </if>
+            <if test="params.activityId != null">
+                and t.activity_id = #{params.activityId,jdbcType=INTEGER}
+            </if>
+            <if test="params.name != null and '' != params.name">
+                and t.name = #{params.name,jdbcType=VARCHAR}
+            </if>
+            <if test="params.grade != null">
+                and t.grade = #{params.grade,jdbcType=TINYINT}
+            </if>
+            <if test="params.probability != null">
+                and t.probability = #{params.probability,jdbcType=REAL}
+            </if>
+            <if test="params.upperLimit != null">
+                and t.upper_limit = #{params.upperLimit,jdbcType=SMALLINT}
+            </if>
+            <if test="params.type != null">
+                and t.type = #{params.type,jdbcType=TINYINT}
+            </if>
+            <if test="params.amount != null">
+                and t.amount = #{params.amount,jdbcType=DECIMAL}
+            </if>
+            <if test="params.gmtModified != null">
+                and t.gmt_modified = #{params.gmtModified,jdbcType=TIMESTAMP}
+            </if>
+            <if test="params.gmtCreate != null">
+                and t.gmt_create = #{params.gmtCreate,jdbcType=TIMESTAMP}
+            </if>
+        </if>
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_prize t
+        where t.id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_prize t
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) as s from t_prize t where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_prize t
+        where 1=1
+        <include refid="condition"/>
+        <if test="orderByField != null and ''!=orderByField">
+            order by t.${orderByField}
+            <if test="orderByField">
+                ${orderBy}
+            </if>
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_prize
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByPrimarayKeyForModel" parameterType="Prize">
+        delete from t_prize
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="Prize">
+        insert into t_prize (id, activity_id, name,
+        grade, probability, upper_limit,
+        type, amount, gmt_modified,
+        gmt_create)
+        values (#{id,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{grade,jdbcType=TINYINT}, #{probability,jdbcType=REAL}, #{upperLimit,jdbcType=SMALLINT},
+        #{type,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, #{gmtModified,jdbcType=TIMESTAMP},
+        #{gmtCreate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="Prize">
+        insert into t_prize
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="probability != null">
+                probability,
+            </if>
+            <if test="upperLimit != null">
+                upper_limit,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=TINYINT},
+            </if>
+            <if test="probability != null">
+                #{probability,jdbcType=REAL},
+            </if>
+            <if test="upperLimit != null">
+                #{upperLimit,jdbcType=SMALLINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="Prize">
+        update t_prize
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=TINYINT},
+            </if>
+            <if test="probability != null">
+                probability = #{probability,jdbcType=REAL},
+            </if>
+            <if test="upperLimit != null">
+                upper_limit = #{upperLimit,jdbcType=SMALLINT},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="Prize">
+        update t_prize
+        set activity_id = #{activityId,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        grade = #{grade,jdbcType=TINYINT},
+        probability = #{probability,jdbcType=REAL},
+        upper_limit = #{upperLimit,jdbcType=SMALLINT},
+        type = #{type,jdbcType=TINYINT},
+        amount = #{amount,jdbcType=DECIMAL},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
