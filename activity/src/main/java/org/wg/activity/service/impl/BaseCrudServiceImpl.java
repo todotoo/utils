@@ -82,9 +82,9 @@ public abstract class BaseCrudServiceImpl implements BaseCrudService {
     }
 
     @Override
-    public <T> List<T> findByBiz(Map<String, Object> params) throws ServiceException {
+    public <T> List<T> listByParams(Map<String, Object> params) throws ServiceException {
         try {
-            return mapper.getByParams(params);
+            return mapper.listByParams(params);
         } catch (Exception e) {
             throw new ServiceException("", e);
         }
@@ -92,9 +92,9 @@ public abstract class BaseCrudServiceImpl implements BaseCrudService {
 
 
     @Override
-    public int findCount(Map<String, Object> params) throws ServiceException {
+    public int countByParams(Map<String, Object> params) throws ServiceException {
         try {
-            return mapper.getCount(params);
+            return mapper.countByParams(params);
         } catch (Exception e) {
             throw new ServiceException("", e);
         }

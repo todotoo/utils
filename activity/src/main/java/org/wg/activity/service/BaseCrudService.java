@@ -37,7 +37,7 @@ public interface BaseCrudService {
      * @return
      * @throws ServiceException
      */
-    <T> List<T> findByBiz(Map<String, Object> params) throws ServiceException;
+    <T> List<T> listByParams(Map<String, Object> params) throws ServiceException;
 
     /**
      * 根据参数查询总记录数
@@ -46,5 +46,5 @@ public interface BaseCrudService {
      * @return
      * @throws ServiceException
      */
-    int findCount(Map<String, Object> params) throws ServiceException;
+    int countByParams(Map<String, Object> params) throws ServiceException;
 }

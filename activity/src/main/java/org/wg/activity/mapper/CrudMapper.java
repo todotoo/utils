@@ -58,7 +58,7 @@ public interface CrudMapper {
 
     <T> T getByPrimaryKey(T entity);
 
-    <T> List<T> getByParams(@Param("params") Map<String, Object> params);
+    <T> List<T> listByParams(@Param("params") Map<String, Object> params);
 
-    int getCount(@Param("params") Map<String, Object> params);
+    int countByParams(@Param("params") Map<String, Object> params);
 }

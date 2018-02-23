@@ -1,4 +1,4 @@
-package org.wg.activity.award.v2;
+package org.wg.activity.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,75 @@ import java.util.Random;
  * 4.判断随机数在哪个区间内，返回该区间的index【生成了随机数12.001，则它属于(10.0, 30.0]，返回 index = 1】
  */
 public class LotteryUtil {
+
+    /**
+     * 概率连续集合
+     */
+    private List<ContinuousList> lotteryList;
+    /**
+     * 这里只需要最大值，最小值默认为0.0
+     */
+    private double maxElement;
+
+    /**
+     * 构造抽奖集合
+     *
+     * @param list 为奖品的概率
+     */
+    public LotteryUtil(List<Double> list) {
+        lotteryList = new ArrayList<>();
+        if (list.size() == 0) {
+            throw new IllegalArgumentException("抽奖集合不能为空！");
+        }
+        double minElement;
+        ContinuousList continuousList;
+        for (Double d : list) {
+            minElement = maxElement;
+            maxElement = maxElement + d;
+            continuousList = new ContinuousList(minElement, maxElement);
+            lotteryList.add(continuousList);
+        }
+    }
+
+    /**
+     * 进行抽奖操作
+     * 返回：奖品的概率list集合中的下标
+     */
+    public int randomColunmIndex() {
+        int index = -1;
+        Random r = new Random();
+        // 生成0-1间的随机数
+        double d = r.nextDouble() * maxElement;
+        if (d == 0d) {
+            // 防止生成0.0
+            d = r.nextDouble() * maxElement;
+        }
+        int size = lotteryList.size();
+        for (int i = 0; i < size; i++) {
+            ContinuousList cl = lotteryList.get(i);
+            if (cl.isContainKey(d)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            throw new IllegalArgumentException("概率集合设置不合理！");
+        }
+        return index;
+
+    }
+
+    public double getMaxElement() {
+        return maxElement;
+    }
+
+    public List<ContinuousList> getLotteryList() {
+        return lotteryList;
+    }
+
+    public void setLotteryList(List<ContinuousList> lotteryList) {
+        this.lotteryList = lotteryList;
+    }
 
     /**
      * 定义一个连续集合
@@ -47,66 +116,5 @@ public class LotteryUtil {
             return flag;
         }
 
-    }
-
-    private List<ContinuousList> lotteryList;   //概率连续集合
-    private double maxElement;                  //这里只需要最大值，最小值默认为0.0
-
-    /**
-     * 构造抽奖集合
-     *
-     * @param list 为奖品的概率
-     */
-    public LotteryUtil(List<Double> list) {
-        lotteryList = new ArrayList<ContinuousList>();
-        if (list.size() == 0) {
-            throw new IllegalArgumentException("抽奖集合不能为空！");
-        }
-        double minElement = 0d;
-        ContinuousList continuousList = null;
-        for (Double d : list) {
-            minElement = maxElement;
-            maxElement = maxElement + d;
-            continuousList = new ContinuousList(minElement, maxElement);
-            lotteryList.add(continuousList);
-        }
-    }
-
-    /**
-     * 进行抽奖操作
-     * 返回：奖品的概率list集合中的下标
-     */
-    public int randomColunmIndex() {
-        int index = -1;
-        Random r = new Random();
-        double d = r.nextDouble() * maxElement;  //生成0-1间的随机数
-        if (d == 0d) {
-            d = r.nextDouble() * maxElement;     //防止生成0.0
-        }
-        int size = lotteryList.size();
-        for (int i = 0; i < size; i++) {
-            ContinuousList cl = lotteryList.get(i);
-            if (cl.isContainKey(d)) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            throw new IllegalArgumentException("概率集合设置不合理！");
-        }
-        return index;
-
-    }
-
-    public double getMaxElement() {
-        return maxElement;
-    }
-
-    public List<ContinuousList> getLotteryList() {
-        return lotteryList;
-    }
-
-    public void setLotteryList(List<ContinuousList> lotteryList) {
-        this.lotteryList = lotteryList;
     }
 }

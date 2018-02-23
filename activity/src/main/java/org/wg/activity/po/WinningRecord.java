@@ -5,9 +5,10 @@ import java.util.Date;
 
 /**
  * 中奖记录表
+ *
  * @author wg
- * @date 2018-02-22 15:35:51
  * @version 1.0.0
+ * @date 2018-02-22 15:35:51
  */
 public class WinningRecord implements Serializable {
 
@@ -34,7 +35,6 @@ public class WinningRecord implements Serializable {
     private Date winningTime;
 
     /**
-     * 
      * {@linkplain #userId}
      *
      * @return the value of t_winning_record.user_id
@@ -45,6 +45,7 @@ public class WinningRecord implements Serializable {
 
     /**
      * {@linkplain #userId}
+     *
      * @param userId the value for t_winning_record.user_id
      */
     public void setUserId(Integer userId) {
@@ -52,7 +53,6 @@ public class WinningRecord implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #prizeName}
      *
      * @return the value of t_winning_record.prize_name
@@ -63,6 +63,7 @@ public class WinningRecord implements Serializable {
 
     /**
      * {@linkplain #prizeName}
+     *
      * @param prizeName the value for t_winning_record.prize_name
      */
     public void setPrizeName(String prizeName) {
@@ -70,7 +71,6 @@ public class WinningRecord implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #prizeGrade}
      *
      * @return the value of t_winning_record.prize_grade
@@ -81,6 +81,7 @@ public class WinningRecord implements Serializable {
 
     /**
      * {@linkplain #prizeGrade}
+     *
      * @param prizeGrade the value for t_winning_record.prize_grade
      */
     public void setPrizeGrade(Byte prizeGrade) {
@@ -88,7 +89,6 @@ public class WinningRecord implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #winningTime}
      *
      * @return the value of t_winning_record.winning_time
@@ -99,6 +99,7 @@ public class WinningRecord implements Serializable {
 
     /**
      * {@linkplain #winningTime}
+     *
      * @param winningTime the value for t_winning_record.winning_time
      */
     public void setWinningTime(Date winningTime) {

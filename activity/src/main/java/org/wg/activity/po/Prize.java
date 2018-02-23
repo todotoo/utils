@@ -5,13 +5,16 @@ import java.util.Date;
 
 /**
  * 奖品表
+ *
  * @author wg
- * @date 2018-02-22 15:35:51
  * @version 1.0.0
+ * @date 2018-02-22 15:35:51
  */
 public class Prize implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private Integer id;
 
     /**
      * 所属活动id.
@@ -31,7 +34,7 @@ public class Prize implements Serializable {
     /**
      * 概率.
      */
-    private Float probability;
+    private Double probability;
 
     /**
      * 中奖次数上限.
@@ -58,8 +61,15 @@ public class Prize implements Serializable {
      */
     private Date gmtCreate;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     /**
-     * 
      * {@linkplain #activityId}
      *
      * @return the value of t_prize.activity_id
@@ -70,6 +80,7 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #activityId}
+     *
      * @param activityId the value for t_prize.activity_id
      */
     public void setActivityId(Integer activityId) {
@@ -77,7 +88,6 @@ public class Prize implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #name}
      *
      * @return the value of t_prize.name
@@ -88,6 +98,7 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #name}
+     *
      * @param name the value for t_prize.name
      */
     public void setName(String name) {
@@ -95,7 +106,6 @@ public class Prize implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #grade}
      *
      * @return the value of t_prize.grade
@@ -106,6 +116,7 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #grade}
+     *
      * @param grade the value for t_prize.grade
      */
     public void setGrade(Byte grade) {
@@ -113,25 +124,24 @@ public class Prize implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #probability}
      *
      * @return the value of t_prize.probability
      */
-    public Float getProbability() {
+    public Double getProbability() {
         return probability;
     }
 
     /**
      * {@linkplain #probability}
+     *
      * @param probability the value for t_prize.probability
      */
-    public void setProbability(Float probability) {
+    public void setProbability(Double probability) {
         this.probability = probability;
     }
 
     /**
-     * 
      * {@linkplain #upperLimit}
      *
      * @return the value of t_prize.upper_limit
@@ -142,6 +152,7 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #upperLimit}
+     *
      * @param upperLimit the value for t_prize.upper_limit
      */
     public void setUpperLimit(Short upperLimit) {
@@ -149,7 +160,6 @@ public class Prize implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #type}
      *
      * @return the value of t_prize.type
@@ -160,6 +170,7 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #type}
+     *
      * @param type the value for t_prize.type
      */
     public void setType(Byte type) {
@@ -167,7 +178,6 @@ public class Prize implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #amount}
      *
      * @return the value of t_prize.amount
@@ -178,6 +188,7 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #amount}
+     *
      * @param amount the value for t_prize.amount
      */
     public void setAmount(Long amount) {
@@ -185,7 +196,6 @@ public class Prize implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #gmtModified}
      *
      * @return the value of t_prize.gmt_modified
@@ -196,6 +206,7 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #gmtModified}
+     *
      * @param gmtModified the value for t_prize.gmt_modified
      */
     public void setGmtModified(Date gmtModified) {
@@ -203,7 +214,6 @@ public class Prize implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #gmtCreate}
      *
      * @return the value of t_prize.gmt_create
@@ -214,9 +224,26 @@ public class Prize implements Serializable {
 
     /**
      * {@linkplain #gmtCreate}
+     *
      * @param gmtCreate the value for t_prize.gmt_create
      */
     public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
+    }
+
+    @Override
+    public String toString() {
+        return "Prize{" +
+                "id=" + id +
+                ", activityId=" + activityId +
+                ", name='" + name + '\'' +
+                ", grade=" + grade +
+                ", probability=" + probability +
+                ", upperLimit=" + upperLimit +
+                ", type=" + type +
+                ", amount=" + amount +
+                ", gmtModified=" + gmtModified +
+                ", gmtCreate=" + gmtCreate +
+                '}';
     }
 }

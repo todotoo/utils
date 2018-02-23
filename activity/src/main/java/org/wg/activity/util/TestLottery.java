@@ -1,4 +1,4 @@
-package org.wg.activity.award.v2;
+package org.wg.activity.util;
 
 /**
  * Created by run on 2018/1/25.
@@ -16,6 +16,18 @@ class Result {
     private int time;
     private double probability;
     private double realProbability;
+
+    public Result() {
+
+    }
+
+    public Result(int index, int sumTime, int time, double realProbability) {
+        this.setIndex(index);
+        this.setTime(time);
+        this.setSumTime(sumTime);
+        this.setRealProbability(realProbability);
+
+    }
 
     public int getIndex() {
         return index;
@@ -51,18 +63,6 @@ class Result {
 
     public void setRealProbability(double realProbability) {
         this.realProbability = realProbability;
-    }
-
-    public Result() {
-
-    }
-
-    public Result(int index, int sumTime, int time, double realProbability) {
-        this.setIndex(index);
-        this.setTime(time);
-        this.setSumTime(sumTime);
-        this.setRealProbability(realProbability);
-
     }
 
     @Override

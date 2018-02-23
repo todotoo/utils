@@ -5,9 +5,10 @@ import java.util.Date;
 
 /**
  * 抽奖次数
+ *
  * @author wg
- * @date 2018-02-22 15:35:51
  * @version 1.0.0
+ * @date 2018-02-22 15:35:51
  */
 public class LotteryNumber implements Serializable {
 
@@ -34,7 +35,6 @@ public class LotteryNumber implements Serializable {
     private Date gmtCreate;
 
     /**
-     * 
      * {@linkplain #userId}
      *
      * @return the value of t_lottery_number.user_id
@@ -45,6 +45,7 @@ public class LotteryNumber implements Serializable {
 
     /**
      * {@linkplain #userId}
+     *
      * @param userId the value for t_lottery_number.user_id
      */
     public void setUserId(Integer userId) {
@@ -52,7 +53,6 @@ public class LotteryNumber implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #count}
      *
      * @return the value of t_lottery_number.count
@@ -63,6 +63,7 @@ public class LotteryNumber implements Serializable {
 
     /**
      * {@linkplain #count}
+     *
      * @param count the value for t_lottery_number.count
      */
     public void setCount(Integer count) {
@@ -70,7 +71,6 @@ public class LotteryNumber implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #gmtModified}
      *
      * @return the value of t_lottery_number.gmt_modified
@@ -81,6 +81,7 @@ public class LotteryNumber implements Serializable {
 
     /**
      * {@linkplain #gmtModified}
+     *
      * @param gmtModified the value for t_lottery_number.gmt_modified
      */
     public void setGmtModified(Date gmtModified) {
@@ -88,7 +89,6 @@ public class LotteryNumber implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #gmtCreate}
      *
      * @return the value of t_lottery_number.gmt_create
@@ -99,6 +99,7 @@ public class LotteryNumber implements Serializable {
 
     /**
      * {@linkplain #gmtCreate}
+     *
      * @param gmtCreate the value for t_lottery_number.gmt_create
      */
     public void setGmtCreate(Date gmtCreate) {

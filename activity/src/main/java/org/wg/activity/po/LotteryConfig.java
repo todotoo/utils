@@ -5,9 +5,10 @@ import java.util.Date;
 
 /**
  * 抽奖活动配置表
+ *
  * @author wg
- * @date 2018-02-22 15:35:51
  * @version 1.0.0
+ * @date 2018-02-22 15:35:51
  */
 public class LotteryConfig implements Serializable {
 
@@ -39,7 +40,6 @@ public class LotteryConfig implements Serializable {
     private Date gmtCreate;
 
     /**
-     * 
      * {@linkplain #name}
      *
      * @return the value of t_lottery_config.name
@@ -50,6 +50,7 @@ public class LotteryConfig implements Serializable {
 
     /**
      * {@linkplain #name}
+     *
      * @param name the value for t_lottery_config.name
      */
     public void setName(String name) {
@@ -57,7 +58,6 @@ public class LotteryConfig implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #startDate}
      *
      * @return the value of t_lottery_config.start_date
@@ -68,6 +68,7 @@ public class LotteryConfig implements Serializable {
 
     /**
      * {@linkplain #startDate}
+     *
      * @param startDate the value for t_lottery_config.start_date
      */
     public void setStartDate(Date startDate) {
@@ -75,7 +76,6 @@ public class LotteryConfig implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #endDate}
      *
      * @return the value of t_lottery_config.end_date
@@ -86,6 +86,7 @@ public class LotteryConfig implements Serializable {
 
     /**
      * {@linkplain #endDate}
+     *
      * @param endDate the value for t_lottery_config.end_date
      */
     public void setEndDate(Date endDate) {
@@ -93,7 +94,6 @@ public class LotteryConfig implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #gmtModified}
      *
      * @return the value of t_lottery_config.gmt_modified
@@ -104,6 +104,7 @@ public class LotteryConfig implements Serializable {
 
     /**
      * {@linkplain #gmtModified}
+     *
      * @param gmtModified the value for t_lottery_config.gmt_modified
      */
     public void setGmtModified(Date gmtModified) {
@@ -111,7 +112,6 @@ public class LotteryConfig implements Serializable {
     }
 
     /**
-     * 
      * {@linkplain #gmtCreate}
      *
      * @return the value of t_lottery_config.gmt_create
@@ -122,6 +122,7 @@ public class LotteryConfig implements Serializable {
 
     /**
      * {@linkplain #gmtCreate}
+     *
      * @param gmtCreate the value for t_lottery_config.gmt_create
      */
     public void setGmtCreate(Date gmtCreate) {

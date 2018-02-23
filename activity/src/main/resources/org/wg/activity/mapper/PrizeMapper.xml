@@ -57,7 +57,7 @@
         from t_prize t
         where t.id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+    <select id="listByParams" resultMap="BaseResultMap" parameterType="map">
         select
         <include refid="Base_Column_List"/>
         from t_prize t
