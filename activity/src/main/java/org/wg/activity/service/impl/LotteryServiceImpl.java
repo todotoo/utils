@@ -19,7 +19,7 @@ public class LotteryServiceImpl implements LotteryService {
     public Prize lottery(Integer userId, Integer activityId) {
         // 获取奖品列表
         List<Prize> prizeList = prizeService.listByActivityId(activityId);
-        int index = DrawLotteryUtil.drawGift(prizeList);
+        int index = DrawLotteryUtil.drawPrize(prizeList);
         return prizeList.get(index);
     }
 }

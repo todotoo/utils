@@ -2,18 +2,18 @@ package org.wg.activity.util;
 
 import org.wg.activity.po.Prize;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class DrawLotteryUtil {
 
-    public static int drawGift(List<Prize> prizeList) {
-
+    public static int drawPrize(List<Prize> prizeList) {
         if (null != prizeList && prizeList.size() > 0) {
-            List<Double> orgProbList = new ArrayList<>(prizeList.size());
+            List<BigDecimal> orgProbList = new ArrayList<>(prizeList.size());
+            // 按顺序将概率添加到集合中
             for (Prize prize : prizeList) {
-                //按顺序将概率添加到集合中
                 orgProbList.add(prize.getProbability());
             }
             return draw(orgProbList);
@@ -21,29 +21,49 @@ public class DrawLotteryUtil {
         return -1;
     }
 
-    public static int draw(List<Double> giftProbList) {
-        List<Double> sortRateList = new ArrayList<>();
+    public static int draw(List<BigDecimal> prizeProbList) {
+        List<BigDecimal> sortRateList = new ArrayList<>();
         // 计算概率总和
-        Double sumRate = 0D;
-        for (Double prob : giftProbList) {
-            sumRate += prob;
+        BigDecimal sumRate = BigDecimal.ZERO;
+        for (BigDecimal prob : prizeProbList) {
+            sumRate = sumRate.add(prob);
         }
 
-        if (sumRate != 0) {
+        if (BigDecimal.ZERO.compareTo(sumRate) != 0) {
             // 概率所占比例
-            double rate = 0D;
-            for (Double prob : giftProbList) {
-                rate += prob;
+            BigDecimal rate = BigDecimal.ZERO;
+            for (BigDecimal prob : prizeProbList) {
+                rate = rate.add(prob);
                 // 构建一个比例区段组成的集合(避免概率和不为1)
-                sortRateList.add(rate / sumRate);
+                sortRateList.add(rate.divide(sumRate));
             }
             // 随机生成一个随机数，并排序
-            double random = Math.random();
+            BigDecimal random = BigDecimal.valueOf(Math.random());
             sortRateList.add(random);
             Collections.sort(sortRateList);
             // 返回该随机数在比例集合中的索引
             return sortRateList.indexOf(random);
         }
         return -1;
+    }
+
+    public static void main(String[] args) {
+        /*List<Double> list = new ArrayList();
+        list.add(78.7d);
+        list.add(15.7d);
+        list.add(0.8d);
+        list.add(0.8d);
+        list.add(0.8d);
+        list.add(1.6d);
+        list.add(1.6d);
+        double sum = 0d;
+        for (Double d : list) {
+            sum += d;
+        }
+        System.out.println(sum);*/
+        System.out.println(0.05 + 0.01);
+        System.out.println(1.0 - 0.42);
+        System.out.println(4.015 * 100);
+        System.out.println(123.3 / 100);
     }
 }

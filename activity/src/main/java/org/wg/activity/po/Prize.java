@@ -1,6 +1,7 @@
 package org.wg.activity.po;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -34,7 +35,7 @@ public class Prize implements Serializable {
     /**
      * 概率.
      */
-    private Double probability;
+    private BigDecimal probability;
 
     /**
      * 中奖次数上限.
@@ -128,7 +129,7 @@ public class Prize implements Serializable {
      *
      * @return the value of t_prize.probability
      */
-    public Double getProbability() {
+    public BigDecimal getProbability() {
         return probability;
     }
 
@@ -137,7 +138,7 @@ public class Prize implements Serializable {
      *
      * @param probability the value for t_prize.probability
      */
-    public void setProbability(Double probability) {
+    public void setProbability(BigDecimal probability) {
         this.probability = probability;
     }
 
