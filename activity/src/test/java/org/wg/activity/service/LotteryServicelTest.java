@@ -10,6 +10,9 @@ import org.wg.activity.po.Prize;
 
 import javax.annotation.Resource;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(locations = "classpath:spring/applicationContext-*.xml")
@@ -26,5 +29,4 @@ public class LotteryServicelTest {
         Prize prize = lotteryService.lottery(1, 1);
         System.out.println(prize);
     }
-
 }

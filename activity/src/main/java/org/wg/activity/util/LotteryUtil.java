@@ -1,5 +1,6 @@
 package org.wg.activity.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,23 +23,23 @@ public class LotteryUtil {
     /**
      * 这里只需要最大值，最小值默认为0.0
      */
-    private double maxElement;
+    private BigDecimal maxElement = BigDecimal.ZERO;
 
     /**
      * 构造抽奖集合
      *
      * @param list 为奖品的概率
      */
-    public LotteryUtil(List<Double> list) {
-        lotteryList = new ArrayList<>();
+    public LotteryUtil(List<BigDecimal> list) {
         if (list.size() == 0) {
             throw new IllegalArgumentException("抽奖集合不能为空！");
         }
-        double minElement;
+        lotteryList = new ArrayList<>();
+        BigDecimal minElement;
         ContinuousList continuousList;
-        for (Double d : list) {
+        for (BigDecimal d : list) {
             minElement = maxElement;
-            maxElement = maxElement + d;
+            maxElement = maxElement.add(d);
             continuousList = new ContinuousList(minElement, maxElement);
             lotteryList.add(continuousList);
         }
@@ -52,11 +53,7 @@ public class LotteryUtil {
         int index = -1;
         Random r = new Random();
         // 生成0-1间的随机数
-        double d = r.nextDouble() * maxElement;
-        if (d == 0d) {
-            // 防止生成0.0
-            d = r.nextDouble() * maxElement;
-        }
+        BigDecimal d = BigDecimal.valueOf(r.nextDouble()).multiply(maxElement);
         int size = lotteryList.size();
         for (int i = 0; i < size; i++) {
             ContinuousList cl = lotteryList.get(i);
@@ -69,10 +66,9 @@ public class LotteryUtil {
             throw new IllegalArgumentException("概率集合设置不合理！");
         }
         return index;
-
     }
 
-    public double getMaxElement() {
+    public BigDecimal getMaxElement() {
         return maxElement;
     }
 
@@ -91,11 +87,13 @@ public class LotteryUtil {
      */
     public class ContinuousList {
 
-        private double minElement;
-        private double maxElement;
+        private BigDecimal minElement;
+        private BigDecimal maxElement;
 
-        public ContinuousList(double minElement, double maxElement) {
-            if (minElement > maxElement) {
+        public ContinuousList() {}
+
+        public ContinuousList(BigDecimal minElement, BigDecimal maxElement) {
+            if (minElement.compareTo(maxElement) > 0) {
                 throw new IllegalArgumentException("区间不合理，minElement不能大于maxElement！");
             }
             this.minElement = minElement;
@@ -108,13 +106,9 @@ public class LotteryUtil {
          * @param element
          * @return
          */
-        public boolean isContainKey(double element) {
-            boolean flag = false;
-            if (element > minElement && element <= maxElement) {
-                flag = true;
-            }
-            return flag;
-        }
+        public boolean isContainKey(BigDecimal element) {
 
+            return element.compareTo(minElement) > 0 && element.compareTo(maxElement) <= 0;
+        }
     }
 }

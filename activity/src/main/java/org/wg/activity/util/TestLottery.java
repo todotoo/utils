@@ -4,6 +4,8 @@ package org.wg.activity.util;
  * Created by run on 2018/1/25.
  */
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,14 +16,14 @@ class Result {
     private int index;
     private int sumTime;
     private int time;
-    private double probability;
-    private double realProbability;
+    private BigDecimal probability;
+    private BigDecimal realProbability;
 
     public Result() {
 
     }
 
-    public Result(int index, int sumTime, int time, double realProbability) {
+    public Result(int index, int sumTime, int time, BigDecimal realProbability) {
         this.setIndex(index);
         this.setTime(time);
         this.setSumTime(sumTime);
@@ -53,15 +55,15 @@ class Result {
         this.sumTime = sumTime;
     }
 
-    public double getProbability() {
+    public BigDecimal getProbability() {
         return probability;
     }
 
-    public double getRealProbability() {
+    public BigDecimal getRealProbability() {
         return realProbability;
     }
 
-    public void setRealProbability(double realProbability) {
+    public void setRealProbability(BigDecimal realProbability) {
         this.realProbability = realProbability;
     }
 
@@ -76,7 +78,7 @@ public class TestLottery {
 
     static final int TIME = 100000;
 
-    public static void iteratorMap(Map<Integer, Integer> map, List<Double> list) {
+    public static void iteratorMap(Map<Integer, Integer> map, List<BigDecimal> list) {
         for (Entry<Integer, Integer> entry : map.entrySet()) {
             int index = entry.getKey();
             int time = entry.getValue();
@@ -87,15 +89,15 @@ public class TestLottery {
 
     public static void main(String[] args) {
         //构造概率集合
-        List<Double> list = new ArrayList<Double>();
-        list.add(20d);
-        list.add(80d);
-        list.add(50d);
-        list.add(30d);
+        List<BigDecimal> list = new ArrayList<>();
+        list.add(BigDecimal.valueOf(0.20d));
+        list.add(BigDecimal.valueOf(0.30d));
+        list.add(BigDecimal.valueOf(0.15d));
+        list.add(BigDecimal.valueOf(0.15d));
         LotteryUtil ll = new LotteryUtil(list);
-        double sumProbability = ll.getMaxElement();
+        BigDecimal sumProbability = ll.getMaxElement();
 
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<>(3);
         for (int i = 0; i < TIME; i++) {
             int index = ll.randomColunmIndex();
             if (map.containsKey(index)) {
@@ -105,12 +107,9 @@ public class TestLottery {
             }
         }
         for (int i = 0; i < list.size(); i++) {
-            double probability = list.get(i) / sumProbability;
+            BigDecimal probability = list.get(i).divide(sumProbability, 8, RoundingMode.DOWN);
             list.set(i, probability);
         }
         iteratorMap(map, list);
-
     }
-
-
 }

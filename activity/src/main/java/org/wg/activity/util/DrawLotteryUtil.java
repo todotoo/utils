@@ -3,6 +3,7 @@ package org.wg.activity.util;
 import org.wg.activity.po.Prize;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +22,12 @@ public class DrawLotteryUtil {
         return -1;
     }
 
+
+    /**
+     * 抽奖
+     * @param prizeProbList
+     * @return
+     */
     public static int draw(List<BigDecimal> prizeProbList) {
         List<BigDecimal> sortRateList = new ArrayList<>();
         // 计算概率总和
@@ -35,7 +42,7 @@ public class DrawLotteryUtil {
             for (BigDecimal prob : prizeProbList) {
                 rate = rate.add(prob);
                 // 构建一个比例区段组成的集合(避免概率和不为1)
-                sortRateList.add(rate.divide(sumRate));
+                sortRateList.add(rate.divide(sumRate, 16, RoundingMode.HALF_UP));
             }
             // 随机生成一个随机数，并排序
             BigDecimal random = BigDecimal.valueOf(Math.random());
@@ -61,9 +68,10 @@ public class DrawLotteryUtil {
             sum += d;
         }
         System.out.println(sum);*/
-        System.out.println(0.05 + 0.01);
-        System.out.println(1.0 - 0.42);
-        System.out.println(4.015 * 100);
-        System.out.println(123.3 / 100);
+//        System.out.println(0.05 + 0.01);
+//        System.out.println(1.0 - 0.42);
+//        System.out.println(4.015 * 100);
+//        System.out.println(123.3 / 100);
+        System.out.println(Math.random());
     }
 }
