@@ -21,10 +21,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author li.biao
- * @ClassName StringUtils
- * @Description 字符串工具类
- * @date 2015-4-1
+ * 字符串工具类<br />
+ * 常用指数：★★★★★
+ *
+ * @author wg
+ * @date 2015-4-1 10:10:10
  */
 public class StringUtils {
 
@@ -632,89 +633,5 @@ public class StringUtils {
         htmlStr = m_html.replaceAll(""); // 过滤html标签
 
         return htmlStr.trim(); // 返回文本字符串
-    }
-
-    /**
-     * 得到表名后缀
-     *
-     * @param date
-     * @return
-     */
-    public static String getSuffixStr(Date date) {
-        String year = (DateUtil.getYear(date) + "").substring(2, 4);
-        String monthStr = DateUtil.getMonth(date) + "";
-        int month = Integer.parseInt(monthStr);
-        if (month <= 3) {
-            monthStr = "01";
-        } else if (month <= 6) {
-            monthStr = "02";
-        } else if (month <= 9) {
-            monthStr = "03";
-        } else if (month <= 12) {
-            monthStr = "04";
-        } else {
-            return "";
-        }
-
-        return year + monthStr;
-    }
-
-    /**
-     * @param startDate
-     * @param endDate
-     * @return
-     * @Description 传入开始时间和结束时间的，得到这段时间内的所有分表
-     */
-    public static List<String> getSuffixStrList(Date startDate, Date endDate) {
-        List<String> suffixStrList = new ArrayList<String>();
-        String startSuffix = getSuffixStr(startDate);
-        String endSuffix = getSuffixStr(endDate);
-        if (startSuffix.equalsIgnoreCase(endSuffix)) {
-            suffixStrList.add(startSuffix);
-        } else {
-            outFlag:
-            //跳出循环标识
-            for (int i = Integer.parseInt(startSuffix.substring(0, 2)); i <= Integer.parseInt(endSuffix.substring(0, 2)); i++) {
-                int j = 1;
-                //如果是开始时间的话，则取开始的季度前缀
-                if (i == Integer.parseInt(startSuffix.substring(0, 2))) {
-                    j = Integer.parseInt(startSuffix.substring(2, 4));
-                }
-                for (; j <= 4; j++) {
-                    //如果是小于10的数，则需要前面加上0
-                    suffixStrList.add((i >= 10 ? String.valueOf(i) : "0" + String.valueOf(i)) + '0' + j);
-                    //如果是结束时间所在的分表前缀的话，则跳出循环
-                    if (i == Integer.parseInt(endSuffix.substring(0, 2)) && j == Integer.parseInt(endSuffix.substring(2, 4))) {
-                        break outFlag;
-                    }
-                }
-            }
-
-        }
-        return suffixStrList;
-    }
-
-    /**
-     * @param date
-     * @return
-     * @Description 获取指定时间的上一季度后缀
-     */
-    public static String getPreQuarterSuffix(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.MONTH, -3);    //得到前3个月
-        return getSuffixStr(calendar.getTime());
-    }
-
-    /**
-     * @param date
-     * @return
-     * @Description 获取指定时间的下一季度后缀
-     */
-    public static String getNextQuarterSuffix(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.MONTH, 3);    //得到后3个月
-        return getSuffixStr(calendar.getTime());
     }
 }

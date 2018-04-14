@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wg.activity.mapper.LotteryConfigMapper">
+    <resultMap id="BaseResultMap" type="org.wg.activity.po.LotteryConfig">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="start_date" property="startDate" jdbcType="DATE"/>
+        <result column="end_date" property="endDate" jdbcType="DATE"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    t.id, t.name, t.start_date, t.end_date, t.gmt_modified, t.gmt_create
+    </sql>
+    <sql id="condition">
+        <if test="null!=params">
+            <if test="params.id != null">
+                and t.id = #{params.id,jdbcType=INTEGER}
+            </if>
+            <if test="params.name != null and '' != params.name">
+                and t.name = #{params.name,jdbcType=VARCHAR}
+            </if>
+            <if test="params.startDate != null">
+                and t.start_date = #{params.startDate,jdbcType=DATE}
+            </if>
+            <if test="params.endDate != null">
+                and t.end_date = #{params.endDate,jdbcType=DATE}
+            </if>
+            <if test="params.gmtModified != null">
+                and t.gmt_modified = #{params.gmtModified,jdbcType=TIMESTAMP}
+            </if>
+            <if test="params.gmtCreate != null">
+                and t.gmt_create = #{params.gmtCreate,jdbcType=TIMESTAMP}
+            </if>
+        </if>
+    </sql>
+
+    <select id="getByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_lottery_config t
+        where t.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_lottery_config t
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) as s from t_lottery_config t where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_lottery_config t
+        where 1=1
+        <include refid="condition"/>
+        <if test="orderByField != null and ''!=orderByField">
+            order by t.${orderByField}
+            <if test="orderByField">
+                ${orderBy}
+            </if>
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_lottery_config
+    where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByPrimarayKeyForModel" parameterType="LotteryConfig">
+    delete from t_lottery_config
+    where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="LotteryConfig">
+    insert into t_lottery_config (id, name, start_date, 
+      end_date, gmt_modified, gmt_create
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{gmtModified,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}
+      )
+    </insert>
+    <insert id="insertSelective" parameterType="LotteryConfig">
+        insert into t_lottery_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="endDate != null">
+                end_date,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null">
+                #{startDate,jdbcType=DATE},
+            </if>
+            <if test="endDate != null">
+                #{endDate,jdbcType=DATE},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="LotteryConfig">
+        update t_lottery_config
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate,jdbcType=DATE},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate,jdbcType=DATE},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="LotteryConfig">
+        update t_lottery_config
+        set name = #{name,jdbcType=VARCHAR},
+          start_date = #{startDate,jdbcType=DATE},
+          end_date = #{endDate,jdbcType=DATE},
+          gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+          gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

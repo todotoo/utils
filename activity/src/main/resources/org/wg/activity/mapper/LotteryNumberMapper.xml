@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wg.activity.mapper.LotteryNumberMapper">
+    <resultMap id="BaseResultMap" type="LotteryNumber">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        t.id, t.user_id, t.count, t.gmt_modified, t.gmt_create
+    </sql>
+    <sql id="condition">
+        <if test="null!=params">
+            <if test="params.id != null">
+                and t.id = #{params.id,jdbcType=INTEGER}
+            </if>
+            <if test="params.userId != null">
+                and t.user_id = #{params.userId,jdbcType=INTEGER}
+            </if>
+            <if test="params.count != null">
+                and t.count = #{params.count,jdbcType=INTEGER}
+            </if>
+            <if test="params.gmtModified != null">
+                and t.gmt_modified = #{params.gmtModified,jdbcType=TIMESTAMP}
+            </if>
+            <if test="params.gmtCreate != null">
+                and t.gmt_create = #{params.gmtCreate,jdbcType=TIMESTAMP}
+            </if>
+        </if>
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_lottery_number t
+        where t.id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_lottery_number t
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) as s from t_lottery_number t where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_lottery_number t
+        where 1=1
+        <include refid="condition"/>
+        <if test="orderByField != null and ''!=orderByField">
+            order by t.${orderByField}
+            <if test="orderByField">
+                ${orderBy}
+            </if>
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_lottery_number
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByPrimarayKeyForModel" parameterType="LotteryNumber">
+        delete from t_lottery_number
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="LotteryNumber">
+        insert into t_lottery_number (id, user_id, count,
+        gmt_modified, gmt_create)
+        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{count,jdbcType=INTEGER},
+        #{gmtModified,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="LotteryNumber">
+        insert into t_lottery_number
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="LotteryNumber">
+        update t_lottery_number
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="LotteryNumber">
+        update t_lottery_number
+        set user_id = #{userId,jdbcType=INTEGER},
+        count = #{count,jdbcType=INTEGER},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
