@@ -112,6 +112,11 @@ public class RegexUtils {
      */
     public static final String REGEX_NEGATIVE_FLOAT = "^-[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
 
+    /**
+     * 匹配最多2位小数的数字（包含正负）
+     */
+    public static final String REGEX_MOST_TWO_NUMBER =  "^(-?\\d+)(\\.\\d{0,2})?$";
+
     private RegexUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
