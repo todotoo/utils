@@ -24,6 +24,7 @@ public class LotteryConfigServiceTest {
     @Test
     public void testGetById() {
         LotteryConfig lotteryConfig = lotteryConfigService.getById(1);
+        logger.info("活动配置信息：" + lotteryConfig.toString());
     }
 
 

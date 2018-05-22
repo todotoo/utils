@@ -23,13 +23,19 @@ public class LotteryServiceImpl implements LotteryService {
     public Prize lottery(Integer userId, Integer activityId) {
         // 获取奖品列表
         List<Prize> prizeList = prizeService.listByActivityId(activityId);
-
+        // 方法1
 //        int index = DrawLotteryUtil.drawPrize(prizeList);
-
+        // 方法2
         int index = new LotteryUtil(getProbabilityList(prizeList)).randomColunmIndex();
+        System.out.println("index:" + index);
         return prizeList.get(index);
     }
 
+    /**
+     * 把每个奖品的概率放入集合中
+     * @param prizeList
+     * @return
+     */
     public static List<BigDecimal> getProbabilityList(List<Prize> prizeList) {
         if (null != prizeList && prizeList.size() > 0) {
             List<BigDecimal> orgProbList = new ArrayList<>(prizeList.size());

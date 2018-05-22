@@ -10,7 +10,7 @@ import java.util.Random;
  * 概率为百分数去掉百分号的部分，如10%，则为10
  * 抽奖操作如下：
  * 1.输入抽奖概率集合，【抽奖概率集合为{10.0, 20.0, 30.0}】
- * 2.生成连续集合，       【生成的连续集合为{(0.0, 10.0],(10.0, 30.0],(30.0, 60.0]}】
+ * 2.生成连续区间值集合，       【生成的连续区间值集合为{(0.0, 10.0],(10.0, 30.0],(30.0, 60.0]}】
  * 3.生成随机数，          【生成方法为 random.nextDouble() * maxElement】
  * 4.判断随机数在哪个区间内，返回该区间的index【生成了随机数12.001，则它属于(10.0, 30.0]，返回 index = 1】
  */
@@ -19,7 +19,7 @@ public class LotteryUtil {
     /**
      * 概率连续集合
      */
-    private List<ContinuousList> lotteryList;
+    private List<IntervalValue> lotteryList;
     /**
      * 这里只需要最大值，最小值默认为0.0
      */
@@ -28,20 +28,22 @@ public class LotteryUtil {
     /**
      * 构造抽奖集合
      *
-     * @param list 为奖品的概率
+     * @param probabilityList 奖品概率集合
      */
-    public LotteryUtil(List<BigDecimal> list) {
-        if (list.size() == 0) {
+    public LotteryUtil(List<BigDecimal> probabilityList) {
+        System.err.println("奖品概率集合：" + probabilityList);
+        if (probabilityList.size() == 0) {
             throw new IllegalArgumentException("抽奖集合不能为空！");
         }
         lotteryList = new ArrayList<>();
         BigDecimal minElement;
-        ContinuousList continuousList;
-        for (BigDecimal d : list) {
+        IntervalValue intervalValue;
+        for (BigDecimal d : probabilityList) {
             minElement = maxElement;
             maxElement = maxElement.add(d);
-            continuousList = new ContinuousList(minElement, maxElement);
-            lotteryList.add(continuousList);
+            intervalValue = new IntervalValue(minElement, maxElement);
+            lotteryList.add(intervalValue);
+            System.err.println("概率区间：" + intervalValue);
         }
     }
 
@@ -54,10 +56,11 @@ public class LotteryUtil {
         Random r = new Random();
         // 生成0-1间的随机数
         BigDecimal d = BigDecimal.valueOf(r.nextDouble()).multiply(maxElement);
+        System.err.println("生成的概率：" + d);
         int size = lotteryList.size();
         for (int i = 0; i < size; i++) {
-            ContinuousList cl = lotteryList.get(i);
-            if (cl.isContainKey(d)) {
+            IntervalValue intervalValue = lotteryList.get(i);
+            if (intervalValue.isContainKey(d)) {
                 index = i;
                 break;
             }
@@ -72,27 +75,28 @@ public class LotteryUtil {
         return maxElement;
     }
 
-    public List<ContinuousList> getLotteryList() {
+    public List<IntervalValue> getLotteryList() {
         return lotteryList;
     }
 
-    public void setLotteryList(List<ContinuousList> lotteryList) {
+    public void setLotteryList(List<IntervalValue> lotteryList) {
         this.lotteryList = lotteryList;
     }
 
     /**
-     * 定义一个连续集合
-     * 集合中元素x满足:(minElement,maxElement]
+     * 定义一个区间值
+     * 集合中元素x满足:(minElement, maxElement]
      * 数学表达式为：minElement < x <= maxElement
      */
-    public class ContinuousList {
+    public class IntervalValue {
 
         private BigDecimal minElement;
         private BigDecimal maxElement;
 
-        public ContinuousList() {}
+        public IntervalValue() {
+        }
 
-        public ContinuousList(BigDecimal minElement, BigDecimal maxElement) {
+        public IntervalValue(BigDecimal minElement, BigDecimal maxElement) {
             if (minElement.compareTo(maxElement) > 0) {
                 throw new IllegalArgumentException("区间不合理，minElement不能大于maxElement！");
             }
@@ -101,7 +105,7 @@ public class LotteryUtil {
         }
 
         /**
-         * 判断当前集合是否包含特定元素
+         * 判断当前区间是否包含特定元素
          *
          * @param element
          * @return
@@ -109,6 +113,14 @@ public class LotteryUtil {
         public boolean isContainKey(BigDecimal element) {
 
             return element.compareTo(minElement) > 0 && element.compareTo(maxElement) <= 0;
+        }
+
+        @Override
+        public String toString() {
+            return "IntervalValue{" +
+                    "minElement=" + minElement +
+                    ", maxElement=" + maxElement +
+                    '}';
         }
     }
 }

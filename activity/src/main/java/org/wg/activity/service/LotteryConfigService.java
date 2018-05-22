@@ -2,7 +2,7 @@ package org.wg.activity.service;
 
 
 /**
- * t_lottery_config数据库操作接口
+ * 活动配置服务层
  *
  * @author wg
  * @version 1.0.0

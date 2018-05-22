@@ -14,6 +14,8 @@ public class LotteryConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
+
     /**
      * 活动名称.
      */
@@ -38,6 +40,14 @@ public class LotteryConfig implements Serializable {
      * 创建时间.
      */
     private Date gmtCreate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     /**
      * {@linkplain #name}
@@ -132,7 +142,8 @@ public class LotteryConfig implements Serializable {
     @Override
     public String toString() {
         return "LotteryConfig{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", gmtModified=" + gmtModified +
